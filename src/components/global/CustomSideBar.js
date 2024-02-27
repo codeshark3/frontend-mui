@@ -65,12 +65,7 @@ const CustomSidebar = () => {
       }}
       style={{ display: "flex", height: "100%", minHeight: "400px" }}
     >
-      <Sidebar
-        collapsed={isCollapsed}
-        backgroundColor={colors.primary[400]}
-        height="100vh !important"
-        minHeight="100vh"
-      >
+      <Sidebar collapsed={isCollapsed} backgroundColor={colors.primary[400]}>
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
           <MenuItem
@@ -121,44 +116,46 @@ const CustomSidebar = () => {
                   </Typography>
                 </Box>
               </Box>
-              <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-                <Item
-                  title="Dashboard"
-                  to={"/"}
-                  icon={<HomeOutlinedIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
+            </Box>
+          )}
+          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+            <Item
+              title="Dashboard"
+              to={"/"}
+              icon={<HomeOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
 
-                <Typography
-                  variant="h6"
-                  color={colors.grey[300]}
-                  sx={{ m: "15px 0 5px 20px" }}
-                >
-                  Data
-                </Typography>
-                <Item
-                  title="Tests"
-                  to={"/tests"}
-                  icon={<BiotechIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-                <Item
-                  title="Contacts Information"
-                  to="/contacts"
-                  icon={<ContactsOutlinedIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-                <Item
-                  title="Invoices Balances"
-                  to="/invoices"
-                  icon={<ReceiptOutlinedIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-                {/* 
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Data
+            </Typography>
+            <Item
+              title="Tests"
+              to={"/tests"}
+              icon={<BiotechIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Contacts Information"
+              to="/contacts"
+              icon={<ContactsOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Invoices Balances"
+              to="/invoices"
+              icon={<ReceiptOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            {/* 
             <Typography
               variant="h6"
               color={colors.grey[300]}
@@ -166,9 +163,7 @@ const CustomSidebar = () => {
             >
               Pages
             </Typography> */}
-              </Box>
-            </Box>
-          )}
+          </Box>
         </Menu>
       </Sidebar>
     </Box>

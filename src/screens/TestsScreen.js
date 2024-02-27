@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { Card, Row, Col } from "react-bootstrap";
-import { listTests } from "../store/testSlice";
 
-// import Tests from "../components/Tests";
+import { listTests } from "../store/testSlice";
+import { Link } from "react-router-dom";
+
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 // import SpreadSheet from "../components/SpreadSheet";
@@ -13,7 +13,7 @@ import Message from "../components/Message";
 import { useNavigate } from "react-router-dom";
 
 import { Box, Typography, useTheme } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../theme";
 
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
@@ -59,37 +59,31 @@ const TestsScreen = ({ history }) => {
       align: "left",
     },
 
-    // {
-    //   field: "accessLevel",
-    //   headerName: "Access Level",
-    //   flex: 1,
-    //   renderCell: ({ row: { access } }) => {
-    //     return (
-    //       <Box
-    //         width="60%"
-    //         m="0 auto"
-    //         p="5px"
-    //         display="flex"
-    //         justifyContent="center"
-    //         backgroundColor={
-    //           access === "admin"
-    //             ? colors.greenAccent[600]
-    //             : access === "manager"
-    //             ? colors.greenAccent[700]
-    //             : colors.greenAccent[700]
-    //         }
-    //         borderRadius="4px"
-    //       >
-    //         {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
-    //         {access === "manager" && <SecurityOutlinedIcon />}
-    //         {access === "user" && <LockOpenOutlinedIcon />}
-    //         <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-    //           {access}
-    //         </Typography>
-    //       </Box>
-    //     );
-    //   },
-    // },
+    {
+      field: "accessLevel",
+      headerName: "Access Level",
+      flex: 1,
+      renderCell: ({ row: { _id } }) => {
+        return (
+          <Box
+            width="60%"
+            height="40px"
+            m="0 auto"
+            p="5px"
+            display="flex"
+            justifyContent="center"
+            backgroundColor={colors.greenAccent[700]}
+            borderRadius="4px"
+          >
+            <Link to={`/tests/${_id}`}>
+              <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
+                Details
+              </Typography>
+            </Link>
+          </Box>
+        );
+      },
+    },
   ];
   return (
     <>
@@ -99,7 +93,7 @@ const TestsScreen = ({ history }) => {
         <Message variant="danger">{error}</Message>
       ) : (
         <Box m="20px">
-          <Header title="TEAM" subtitle="Managing the Team Members" />
+          <Header title="TESTS" subtitle="Test data" />
           <Box
             m="40px 0 0 0"
             height="75vh"
@@ -127,6 +121,9 @@ const TestsScreen = ({ history }) => {
               "& .MuiCheckbox-root": {
                 color: `${colors.greenAccent[200]} !important`,
               },
+              "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+                color: `${colors.grey[100]} !important`,
+              },
             }}
           >
             <DataGrid
@@ -134,6 +131,7 @@ const TestsScreen = ({ history }) => {
               rows={tests.tests}
               columns={columns}
               getRowId={(r) => r._id}
+              slots={{ toolbar: GridToolbar }}
             />
           </Box>
         </Box>
